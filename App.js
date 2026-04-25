@@ -1,25 +1,11 @@
 import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import AppNavigator from './src/navigation/AppNavigator';
-import { setupNotifications, startSMSListener, startNotificationListener } from './src/utils/listeners';
-import { Platform } from 'react-native';
+import { setupNotifications } from './src/utils/listeners';
 
 export default function App() {
   useEffect(() => {
-    // Setup notifications
     setupNotifications();
-
-    // Start SMS listener (Android only)
-    if (Platform.OS === 'android') {
-      startSMSListener();
-    }
-
-    // Start notification listener
-    const notifSub = startNotificationListener();
-
-    return () => {
-      notifSub?.remove?.();
-    };
   }, []);
 
   return (
